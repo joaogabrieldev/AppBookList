@@ -22,4 +22,5 @@
     <string name="autorView">autor</string>
     <string name="anoView">ano</string>
     <string name="notaView">nota</string>
+    <string name="voltar">Voltar</string>
 </resources>

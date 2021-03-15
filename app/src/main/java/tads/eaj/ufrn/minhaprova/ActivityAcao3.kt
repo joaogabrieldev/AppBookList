@@ -3,7 +3,9 @@ package tads.eaj.ufrn.minhaprova
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.snackbar.Snackbar
 import tads.eaj.ufrn.minhaprova.databinding.ActivityAcao3Binding
+import java.lang.Exception
 
 class ActivityAcao3 : AppCompatActivity() {
 
@@ -16,50 +18,61 @@ class ActivityAcao3 : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_acao3)
         bd = BookDBOpenner(this)
 
-        var Books = bd.findBookAll()
-        var id = 1
-        var b = bd.findBookID(id)
-
-        binding.TituloView.text = b.nome
-        binding.AutorView.text = b.autor
-        binding.AnoView.text = b.ano.toString()
-        binding.NotaView.text = b.nota.toString()
-
-
-        binding.NextButton.setOnClickListener {
-            if(id == Books.size){
+        try {
+            var Books = bd.findBookAll()
+            var id = 1
+            var b = bd.findBookID(id)
+            binding.TituloView.text = b.nome
+            binding.AutorView.text = b.autor
+            binding.AnoView.text = b.ano.toString()
+            binding.NotaView.text = b.nota.toString()
+            if(Books.size <= id){
                 binding.NextButton.isEnabled = false
-            } else {
-                id++
-                var b = bd.findBookID(id)
-                binding.TituloView.text = b.nome
-                binding.AutorView.text = b.autor
-                binding.AnoView.text = b.ano.toString()
-                binding.NotaView.text = b.nota.toString()
-
-                binding.NextButton.isEnabled = true
-                binding.PreviusButton.isEnabled = true
-
-            }
-        }
-
-        binding.PreviusButton.setOnClickListener {
-            if(id == 1){
                 binding.PreviusButton.isEnabled = false
-            } else {
-                id--
-                var b = bd.findBookID(id)
+            }
+            if(Books.size > id){
+                binding.NextButton.isEnabled = true
+                binding.PreviusButton.isEnabled = false
+            }
 
+            binding.NextButton.setOnClickListener {
+                id++
+                if(id >= Books.size){
+                    binding.NextButton.isEnabled = false
+                }
+                if (id > 1){
+                    binding.PreviusButton.isEnabled = true
+                }
+                var b = bd.findBookID(id)
+                binding.TituloView.text = b.nome
+                binding.AutorView.text = b.autor
+                binding.AnoView.text = b.ano.toString()
+                binding.NotaView.text = b.nota.toString()
+            }
+
+            binding.PreviusButton.setOnClickListener {
+                id--
+                if(id == 1){
+                    binding.PreviusButton.isEnabled = false
+                }
+                if(id < Books.size){
+                    binding.NextButton.isEnabled = true
+                }
+                bd.findBookAll()
+                var b = bd.findBookID(id)
                 binding.TituloView.text = b.nome
                 binding.AutorView.text = b.autor
                 binding.AnoView.text = b.ano.toString()
                 binding.NotaView.text = b.nota.toString()
 
-                binding.NextButton.isEnabled = true
-                binding.PreviusButton.isEnabled = true
-
             }
-        }
 
+        } catch (e:Exception){
+            binding.PreviusButton.isEnabled = false
+            binding.NextButton.isEnabled = false
+            Snackbar.make(binding.TituloView, "Banco vazio", Snackbar.LENGTH_INDEFINITE).setAction("Voltar"){
+                finish()
+            }.show()
+        }
     }
 }
