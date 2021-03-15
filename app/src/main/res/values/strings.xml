@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">MinhaProva</string>
+    <string name="botao_4">Botao 4</string>
+    <string name="textview1">TextView1</string>
+    <string name="textview2">TextView2</string>
+    <string name="botao_3">Botao 3</string>
+    <string name="botao_2">Botao 2</string>
+    <string name="botao_1">Botao 1</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="nota">Nota:</string>
+    <string name="digite_o_ano">Digite o ano</string>
+    <string name="ano">Ano:</string>
+    <string name="autor">Autor:</string>
+    <string name="digite_o_autor">Digite o autor</string>
+    <string name="digite_o_titulo">Digite o titulo</string>
+    <string name="titulo">Titulo:</string>
+    <string name="digite_aqui">Digite aqui</string>
+    <string name="anterior">Anterior</string>
+    <string name="pr_ximo">Próximo</string>
+    <string name="tituloView">titulo</string>
+    <string name="autorView">autor</string>
+    <string name="anoView">ano</string>
+    <string name="notaView">nota</string>
+</resources>
